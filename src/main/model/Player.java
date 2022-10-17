@@ -1,19 +1,33 @@
 package model;
 
+import java.util.Random;
+
+// Represents a Player having a player name and player's individual rating
 public class Player {
 
     private String name;
     private int rating;
-    private String position;
 
-    public Player(String name, int rating, String position) {
+    // REQUIRES: name has non-zero length
+    // EFFECTS: name of the player is set to name; initialize the rating of the player to a random value
+    public Player(String name) {
         this.name = name;
-        this.rating = rating;
-        this.position = position;
+        setRandomRating();
     }
 
-    public void addRating(int rating) {
+    // REQUIRES: rating > 0
+    // MODIFIES: this
+    // EFFECTS: value is added to the existing player rating and returned
+    public int addRating(int rating) {
         this.rating += rating;
+        return this.rating;
+    }
+
+    // EFFECTS: set player's rating  to a randomized integer from [1,100]
+    public void setRandomRating() {
+        Random random = new Random();
+        int randomRating = random.nextInt(100) + 1;
+        this.rating = randomRating;
     }
 
     public String getPlayerName() {
@@ -23,12 +37,6 @@ public class Player {
     public int getPlayerRating() {
         return this.rating;
     }
-
-    public String getPlayerPosition() {
-        return this.position;
-    }
-
-
 
 
 }
