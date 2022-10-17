@@ -105,7 +105,7 @@ public class EventAPP {
     // MODIFIES: this
     // EFFECTS: add Player's name and create Player to Team
     private void addPlayerInfo(Team team) {
-        String name = input.nextLine();
+        String name = input.next();
         player = new Player(name);
         System.out.println(name + "'s skill rating is: " + player.getPlayerRating());
         team.addPlayer(player);
