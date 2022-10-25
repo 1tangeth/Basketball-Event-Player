@@ -40,10 +40,48 @@ public class EventAPP {
                 checkMatchHistory();;
             } else if (command.equals("s")) {
                 processTeamCreation(command);
+                System.out.println("\n");
                 playEvent(team1, team2);
                 // skip a line
+            } else if (command.equals("t")) {
+                boolean keepGoing2 = true;
+                while (keepGoing2) {
+                    teamInterface();
+                    command = input.next();
+                    command = command.toLowerCase();
+                    if (command.equals("v")) {
+                        viewTeam();
+                    } else if (command.equals("l")) {
+                        //TODO load teams
+                    } else if (command.equals("b")) {
+                        break;
+                    }
+                }
             }
         }
+    }
+
+    //TODO Documentation
+    private void viewTeam() {
+        System.out.println("Team 1: ");
+        for (Player p : team1.getTeam()) {
+            System.out.println("\nName: " + p.getPlayerName() + "\tRating: " + p.getPlayerRating());
+        }
+        System.out.println("Team 2: ");
+        for (Player p : team2.getTeam()) {
+            System.out.println("\nName: " + p.getPlayerName() + "\tRating: " + p.getPlayerRating());
+        }
+    }
+
+    //TODO Documentation
+    private void teamInterface() {
+        if (team1.getTeam().isEmpty() && team2.getTeam().isEmpty()) {
+            System.out.println("No Teams have been created");
+        }
+        System.out.println("Select From: ");
+        System.out.println("\t v ----> View Teams!");
+        System.out.println("\t l----> Load Teams");
+        System.out.println("\t b ----> Back to Menu");
     }
 
     // MODIFIES: this
@@ -72,6 +110,7 @@ public class EventAPP {
     private void displayMenu() {
         System.out.println("Select From: ");
         System.out.println("\t s ----> Start Match!");
+        System.out.println("\t t ----> My Teams");
         System.out.println("\t m ----> Match History");
         System.out.println("\t q ----> Quit");
     }
@@ -82,7 +121,7 @@ public class EventAPP {
         if (command.equals("s")) {
             addPlayerToTeams(team1);
             addPlayerToTeams(team2);
-            System.out.println("\nTeam Creation Complete! ");
+            System.out.println("Team Creation Complete!");
         }
     }
 

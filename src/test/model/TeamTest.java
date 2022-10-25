@@ -35,6 +35,8 @@ class TeamTest {
 
     @Test
     void testGetOverallRating(){
+        testTeam.addPlayer(player1);
+        testTeam.addPlayer(player2);
         int rating = player1.getPlayerRating() + player2.getPlayerRating();
         assertEquals(rating, testTeam.getOverallRating());
     }

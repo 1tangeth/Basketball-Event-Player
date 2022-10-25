@@ -15,5 +15,7 @@ User Story that I have achieved yet:
 User Story in progress: 
 - As a user, I want to add skill points to the team that lost so they can comeback
 - As a user, I want to have the option of creating a new team with new players after each match
+- As a user, I want to be able to save my teams to file
+- As a user, I want to load the teams from the file
 
 
