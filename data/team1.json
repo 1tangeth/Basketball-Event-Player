@@ -1,0 +1,25 @@
+{
+    "team name": "Lakers",
+    "players": [
+        {
+            "player name": "Kobe Bryant",
+            "rating": 54
+        },
+        {
+            "player name": "Lebron James",
+            "rating": 83
+        },
+        {
+            "player name": "Tony Skr",
+            "rating": 91
+        },
+        {
+            "player name": "William Tang",
+            "rating": 93
+        },
+        {
+            "player name": "Ethan Tang",
+            "rating": 86
+        }
+    ]
+}

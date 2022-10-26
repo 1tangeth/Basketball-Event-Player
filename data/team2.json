@@ -1,0 +1,25 @@
+{
+    "team name": "Bulls",
+    "players": [
+        {
+            "player name": "Xing",
+            "rating": 41
+        },
+        {
+            "player name": "Sun",
+            "rating": 49
+        },
+        {
+            "player name": "Aiden",
+            "rating": 21
+        },
+        {
+            "player name": "Sunny",
+            "rating": 17
+        },
+        {
+            "player name": "Alicia",
+            "rating": 37
+        }
+    ]
+}

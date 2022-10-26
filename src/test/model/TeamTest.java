@@ -27,9 +27,9 @@ class TeamTest {
     void testAddPlayer(){
         testTeam.addPlayer(player1);
         testTeam.addPlayer(player2);
-        assertEquals(2, testTeam.getTeam().size());
-        assertEquals(player1, testTeam.getTeam().get(0));
-        assertEquals(player2, testTeam.getTeam().get(1));
+        assertEquals(2, testTeam.getPlayers().size());
+        assertEquals(player1, testTeam.getPlayers().get(0));
+        assertEquals(player2, testTeam.getPlayers().get(1));
 
     }
 

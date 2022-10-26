@@ -1,13 +1,17 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a team having a team name, a list of players, a list of all match results and an overall-rating of
 // all players in the team list.
-public class Team {
+public class Team implements Writable {
     private String teamName;
-    private List<Player> team = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
     private List<String> results = new ArrayList<>();
     private int overAllRating;
 
@@ -22,12 +26,12 @@ public class Team {
     // MODIFIES: this
     // EFFECTS: add a Player object to the initialized list of Players.
     public void addPlayer(Player p) {
-        team.add(p);
+        players.add(p);
     }
 
 
-    public List<Player> getTeam() {
-        return team;
+    public List<Player> getPlayers() {
+        return players;
     }
 
     public String getTeamName() {
@@ -39,11 +43,16 @@ public class Team {
         return this.overAllRating;
     }
 
+    public void clearPlayer() {
+        this.players.clear();
+    }
+
+
     // EFFECTS: return a sum of all players' rating inside 'team'
     public int getPlayersRatings() {
         int rating = 0;
-        for (int i = 0; i < team.size(); i++) {
-            rating += team.get(i).getPlayerRating();
+        for (int i = 0; i < players.size(); i++) {
+            rating += players.get(i).getPlayerRating();
         }
         return rating;
     }
@@ -58,4 +67,21 @@ public class Team {
         return this.results;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("team name", teamName);
+        json.put("players", playerToTeam());
+        return json;
+    }
+
+    private JSONArray playerToTeam() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Player p : players) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
+    }
 }

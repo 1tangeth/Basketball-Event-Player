@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.Random;
 
 // Represents a Player having a player name and player's individual rating
-public class Player {
+public class Player implements Writable {
 
     private String name;
     private int rating;
@@ -34,9 +37,20 @@ public class Player {
         return this.name;
     }
 
+    public void setRating(int r) {
+        this.rating = r;
+    }
+
     public int getPlayerRating() {
         return this.rating;
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("player name", name);
+        json.put("rating", rating);
+        return json;
+    }
 }
