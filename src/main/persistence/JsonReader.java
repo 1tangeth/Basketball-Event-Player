@@ -10,7 +10,7 @@ import model.Player;
 import model.Team;
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads team from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -39,7 +39,7 @@ public class JsonReader {
     }
 
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses team from JSON object and returns it
     private Team parseTeam(JSONObject jsonObject) {
         String name = jsonObject.getString("team name");
         Team wr = new Team(name);
@@ -47,23 +47,23 @@ public class JsonReader {
         return wr;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
-    private void addPlayers(Team wr, JSONObject jsonObject) {
+    // MODIFIES: tm
+    // EFFECTS: parses players from JSON object and adds them to team
+    private void addPlayers(Team tm, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("players");
         for (Object json : jsonArray) {
             JSONObject nextThingy = (JSONObject) json;
-            addPlayer(wr, nextThingy);
+            addPlayer(tm, nextThingy);
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
-    private void addPlayer(Team wr, JSONObject jsonObject) {
+    // MODIFIES: tm
+    // EFFECTS: parses player from JSON object and adds it to team
+    private void addPlayer(Team tm, JSONObject jsonObject) {
         String name = jsonObject.getString("player name");
         int rating = jsonObject.getInt("rating");
         Player p = new Player(name);
         p.setRating(rating);
-        wr.addPlayer(p);
+        tm.addPlayer(p);
     }
 }

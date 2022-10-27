@@ -43,6 +43,8 @@ public class Team implements Writable {
         return this.overAllRating;
     }
 
+    // MODIFIES: this
+    // EFFECTS: remove all players inside the player list
     public void clearPlayer() {
         this.players.clear();
     }
@@ -67,6 +69,7 @@ public class Team implements Writable {
         return this.results;
     }
 
+    // EFFECTS: team is serialized into JSON, return the Json object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -75,6 +78,7 @@ public class Team implements Writable {
         return json;
     }
 
+    // EFFECTS: players in the team are serialized into JSON, return the Json object
     private JSONArray playerToTeam() {
         JSONArray jsonArray = new JSONArray();
 

@@ -75,6 +75,8 @@ public class EventAPP {
         System.out.println("\t q ----> Quit");
     }
 
+    // MODIFIES: this
+    // EFFECTS: create an event of both teams if there are players in each team
     private void playCurrentPlayers() {
         if (team1.getPlayers().isEmpty() && team2.getPlayers().isEmpty()) {
             System.out.println("There are no current players, please start a match with new players or load team");
@@ -85,6 +87,7 @@ public class EventAPP {
         }
     }
 
+    // EFFECTS: get input of user from the team menu
     private void teamMenu(String command) {
         boolean keepGoing2 = true;
         while (keepGoing2) {
@@ -108,7 +111,7 @@ public class EventAPP {
         }
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves both teams to file
     private void saveTeams() {
         try {
             jsonWriterOne.open();
@@ -125,7 +128,7 @@ public class EventAPP {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads both teams from file
     private void loadTeams() {
         try {
             team1 = jsonReaderOne.read();
@@ -137,7 +140,7 @@ public class EventAPP {
         }
     }
 
-    //TODO Documentation
+    // EFFECTS: display players of each team
     private void viewTeam() {
         System.out.println("Team 1: ");
         for (Player p : team1.getPlayers()) {
@@ -149,7 +152,7 @@ public class EventAPP {
         }
     }
 
-    //TODO Documentation
+    // EFFECTS: display a menu of options of team to user
     private void teamInterface() {
         System.out.println("Select From: ");
         System.out.println("\t v ----> View Teams!");
@@ -159,7 +162,6 @@ public class EventAPP {
 
     }
 
-    // MODIFIES: this
     // EFFECTS: process match results
     private void checkMatchHistory() {
         if (team1.getResults().isEmpty()) {
@@ -192,11 +194,14 @@ public class EventAPP {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: clear all players of each team
     private void clearPlayers(Team t1, Team t2) {
         t1.clearPlayer();
         t2.clearPlayer();
     }
 
+    // EFFECTS: display each team's sum of ratings and the match result between two teams
     private void printResult() {
         System.out.println("Team One's Overall Rating:" + team1.getOverallRating());
         System.out.println("Team Two's Overall Rating:" + team2.getOverallRating());
@@ -220,7 +225,7 @@ public class EventAPP {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: team
     // EFFECTS: add Player's name and create Player to Team
     private void addPlayerInfo(Team team) {
         String name = input.next();

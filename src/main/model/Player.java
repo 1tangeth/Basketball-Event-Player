@@ -45,7 +45,7 @@ public class Player implements Writable {
         return this.rating;
     }
 
-
+    // EFFECTS: Player object's name and associated rating is serialized into json, return the json object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
