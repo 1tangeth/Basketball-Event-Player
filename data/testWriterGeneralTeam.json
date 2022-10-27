@@ -1,0 +1,13 @@
+{
+    "team name": "Lakers",
+    "players": [
+        {
+            "player name": "Lebron James",
+            "rating": 30
+        },
+        {
+            "player name": "Kobe Bryant",
+            "rating": 40
+        }
+    ]
+}

@@ -34,6 +34,15 @@ class TeamTest {
     }
 
     @Test
+    void testClearPlayer() {
+        testTeam.addPlayer(player1);
+        testTeam.addPlayer(player2);
+        assertEquals(2,testTeam.getPlayers().size());
+        testTeam.clearPlayer();
+        assertEquals(0,testTeam.getPlayers().size());
+    }
+
+    @Test
     void testGetOverallRating(){
         testTeam.addPlayer(player1);
         testTeam.addPlayer(player2);

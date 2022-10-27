@@ -20,6 +20,12 @@ class PlayerTest {
     }
 
     @Test
+    void testSetRating() {testPlayer.setRating(10);
+    assertEquals(10, testPlayer.getPlayerRating());
+    testPlayer.setRating(100);
+    assertEquals(100, testPlayer.getPlayerRating());}
+
+    @Test
     void testRandomRatingRange(){
         // Test the range between [0-100]
         assertTrue(testPlayer.getPlayerRating() <= 100);
