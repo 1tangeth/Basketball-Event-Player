@@ -1,25 +1,7 @@
 {
-    "team name": "dqw",
-    "players": [
-        {
-            "player name": "jiofa;ds;lk",
-            "rating": 4
-        },
-        {
-            "player name": "fdas",
-            "rating": 21
-        },
-        {
-            "player name": "fasd",
-            "rating": 97
-        },
-        {
-            "player name": "fads",
-            "rating": 80
-        },
-        {
-            "player name": "fads",
-            "rating": 40
-        }
-    ]
+    "team name": "team 2",
+    "players": [{
+        "player name": "Ethan Tang",
+        "rating": 38
+    }]
 }

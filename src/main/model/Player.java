@@ -18,6 +18,11 @@ public class Player implements Writable {
         setRandomRating();
     }
 
+    public Player(String name, int rating) {
+        this.name = name;
+        this.rating = rating;
+    }
+
     // REQUIRES: rating > 0
     // MODIFIES: this
     // EFFECTS: value is added to the existing player rating and returned
