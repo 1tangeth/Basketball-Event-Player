@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// Basketball Event Application GUI
 public class EventPlayer extends JFrame implements ActionListener, KeyListener {
 
     private static final int WIDTH = 1000;
@@ -44,6 +45,9 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
     private JsonWriter jsonWriterTwo;
     private JsonReader jsonReaderTwo;
 
+
+    // MODIFIES: this
+    // EFFECTS: create jsonWriter and jsonReader, teams and create gui
     public EventPlayer() {
         super("Basketball Simulator");
         //TODO: add team name manually
@@ -60,6 +64,8 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         initializeFrame();
     }
 
+    // MODIFIES: this
+    // EFFECTS: add JPanels, JButtons to JPanel
     private void addComponents() {
         add(grayPanel);
         add(pinkPanel);
@@ -74,6 +80,7 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         pinkPanel.add(title);
     }
 
+    // EFFECTS: create buttons and add action listener
     private void createButtons() {
         addButton1 = new JButton("Add Player To T1 (OR Press '1')");
         addButton1.addActionListener(this);
@@ -88,6 +95,8 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         loadButton.addActionListener(this);
     }
 
+    // MODIFIES: this
+    // EFFECTS: create JPanels for JFrame
     private void createPanel() {
         // JPanel = a gui component that functions as a container to hold other components
         pinkPanel = new JPanel();
@@ -108,6 +117,8 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         teamTwoPanel.setBounds(20, 80 + 40 + 20 + 300 + 20 + 30, WIDTH - 40, 300);
     }
 
+    // MODIFIES: this
+    // EFFECTS: create JPanel of the columns for team one
     private void displayTeamOneCol() {
         teamOneCol = new JPanel(new GridLayout(1,3));
         teamOneCol.setBackground(Color.PINK);
@@ -123,6 +134,8 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         teamOneCol.add(rating);
     }
 
+    // MODIFIES: this
+    // EFFECTS: create JPanel of the columns for team two
     private void displayTeamTwoCol() {
         teamTwoCol = new JPanel(new GridLayout(1,2));
         teamTwoCol.setBackground(Color.PINK);
@@ -138,6 +151,8 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         teamTwoCol.add(rating2);
     }
 
+    // MODIFIES: this
+    // EFFECTS: create JFrame and configure settings
     public void initializeFrame() {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -149,11 +164,13 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
                 Toolkit.getDefaultToolkit().getScreenSize().height / 9);
         setResizable(false);
         setLocationRelativeTo(null);
-        addKeyListener(this);
         setFocusable(true);
+        addKeyListener(this);
+
 
     }
 
+    // EFFECTS: create title of the GUI
     private void createTitle() {
         title = new JLabel();
         title.setText("BasketBall Team Simulator");
@@ -165,12 +182,17 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         title.setIcon(icon);
     }
 
+
+    // MODIFIES: AddPlayerWindow
+    // EFFECTS: create pop up window to ask user to enter Player name
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton1) {
             new AddPlayerWindow(team1, teamOnePanel, this);
+            this.requestFocus();
         } else if (e.getSource() == addButton2) {
             new AddPlayerWindow(team2, teamTwoPanel,this);
+            this.requestFocus();
         } else if (e.getSource() == saveButton) {
             saveTeam();
         } else if (e.getSource() == loadButton) {
@@ -178,6 +200,8 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads both teams from file
     private void loadTeam() {
         try {
             team1 = jsonReaderOne.read();
@@ -191,6 +215,8 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: update the team information in GUI
     private void updateTeamDisplay(Team t, JPanel p) {
         p.removeAll();
         for (int i = 0; i < t.getPlayers().size(); i++) {
@@ -209,11 +235,10 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         }
         revalidate();
         repaint();
-
-
-
     }
 
+    // MODIFIES: this
+    // EFFECTS: save both teams from file
     private void saveTeam() {
         try {
             jsonWriterOne.open();
@@ -234,12 +259,13 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
 
     }
 
+    // MODIFIES: AddPlayerWindow
+    // EFFECTS: create pop up window to ask user to enter Player name
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_1) {
             new AddPlayerWindow(team1, teamOnePanel, this);
-        }
-        if (e.getKeyCode() == KeyEvent.VK_2) {
+        } else if (e.getKeyCode() == KeyEvent.VK_2) {
             new AddPlayerWindow(team2, teamTwoPanel,this);
         }
     }
@@ -248,6 +274,8 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
     public void keyReleased(KeyEvent e) {
     }
 
+
+    // EFFECTS: constructs event and runs application
     public static void main(String[] args) {
         new EventPlayer();
 //        try {

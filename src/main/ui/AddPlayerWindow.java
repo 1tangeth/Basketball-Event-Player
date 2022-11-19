@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
+// Add player pop up window, and display players information
 public class AddPlayerWindow extends JFrame implements  ActionListener {
     private JLabel label;
     private JLabel labelRating;
@@ -23,7 +24,8 @@ public class AddPlayerWindow extends JFrame implements  ActionListener {
     private JPanel displayPanel;
     private JFrame frame;
 
-    //FIX LENGTH
+    // MODIFIES: this
+    // EFFECTS: set the JPanel, Jframe and team of players
     public AddPlayerWindow(Team team, JPanel displayPanel, JFrame frame) {
         super("Add Player");
         this.displayPanel = displayPanel;
@@ -44,6 +46,8 @@ public class AddPlayerWindow extends JFrame implements  ActionListener {
         setResizable(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: create buttons, text fields and labels
     private void createComponents() {
         addBtn = new JButton("Add");
         addBtn.setActionCommand("AddPlayer");
@@ -59,6 +63,7 @@ public class AddPlayerWindow extends JFrame implements  ActionListener {
         field = new JTextField(5);
     }
 
+    // EFFECTS: add the components to displayPanel
     private void addComponents() {
         add(label);
         add(field);
@@ -67,6 +72,8 @@ public class AddPlayerWindow extends JFrame implements  ActionListener {
         add(addBtn);
     }
 
+    // MODIFIES: team
+    // EFFECTS: add player to team of players, display the components, player info and refresh JFrame
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("AddPlayer")) {
             this.team.addPlayer(new Player(field.getText(), this.rating));
@@ -85,6 +92,8 @@ public class AddPlayerWindow extends JFrame implements  ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: display players information to the displayPanel
     private void displayPlayers() {
         for (int i = 0; i < this.team.getPlayers().size(); i++) {
             JLabel num = new JLabel(Integer.toString(i + 1));

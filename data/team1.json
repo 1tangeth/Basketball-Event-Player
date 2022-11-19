@@ -1,7 +1,4 @@
 {
     "team name": "team 1",
-    "players": [{
-        "player name": "Ethan Tang",
-        "rating": 81
-    }]
+    "players": []
 }
