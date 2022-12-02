@@ -1,6 +1,8 @@
-package persistence;
+package model.persistence;
 
 
+import model.Event;
+import model.EventLog;
 import model.Team;
 import org.json.JSONObject;
 
@@ -31,6 +33,9 @@ public class JsonWriter {
     public void write(Team tm) {
         JSONObject json = tm.toJson();
         saveToFile(json.toString(TAB));
+
+        Event x = new Event("File saved for " + tm.getTeamName());
+        EventLog.getInstance().logEvent(x);
     }
 
     // MODIFIES: this

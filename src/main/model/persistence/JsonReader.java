@@ -1,4 +1,4 @@
-package persistence;
+package model.persistence;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import model.Event;
+import model.EventLog;
 import model.Player;
 import model.Team;
 import org.json.*;
@@ -21,9 +23,13 @@ public class JsonReader {
 
     // EFFECTS: reads Team from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public Team read() throws IOException {
+    public Team read(String team) throws IOException {
+        Event x = new Event("File loaded for " + team);
+        EventLog.getInstance().logEvent(x);
+
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
+        
         return parseTeam(jsonObject);
     }
 
@@ -34,7 +40,6 @@ public class JsonReader {
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         }
-
         return contentBuilder.toString();
     }
 

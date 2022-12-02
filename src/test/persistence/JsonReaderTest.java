@@ -2,6 +2,7 @@ package persistence;
 
 import model.Player;
 import model.Team;
+import model.persistence.JsonReader;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            Team tm = reader.read();
+            Team tm = reader.read("team 1");
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -26,7 +27,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderEmptyWorkRoom() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyTeam.json");
         try {
-            Team tm = reader.read();
+            Team tm = reader.read("team 1");
             assertEquals("My Team", tm.getTeamName());
             assertEquals(0, tm.getPlayers().size());
         } catch (IOException e) {
@@ -38,7 +39,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderGeneralTeam() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralTeam.json");
         try {
-            Team tm = reader.read();
+            Team tm = reader.read("team 1");
             assertEquals("Lakers", tm.getTeamName());
             List<Player> players = tm.getPlayers();
             assertEquals(3, players.size());

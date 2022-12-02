@@ -1,7 +1,7 @@
 package model;
 
 import org.json.JSONObject;
-import persistence.Writable;
+import model.persistence.Writable;
 
 import java.util.Random;
 
@@ -16,11 +16,15 @@ public class Player implements Writable {
     public Player(String name) {
         this.name = name;
         setRandomRating();
+        Event x = new Event("Player " + this.name + " is created with rating " + this.rating);
+        EventLog.getInstance().logEvent(x);
     }
 
     public Player(String name, int rating) {
         this.name = name;
         this.rating = rating;
+        Event x = new Event("Player " + this.name + " is created with rating " + this.rating);
+        EventLog.getInstance().logEvent(x);
     }
 
     // REQUIRES: rating > 0

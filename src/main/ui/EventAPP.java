@@ -1,10 +1,10 @@
 package ui;
 
-import model.Event;
+import model.Game;
 import model.Player;
 import model.Team;
-import persistence.JsonReader;
-import persistence.JsonWriter;
+import model.persistence.JsonReader;
+import model.persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class EventAPP {
     private Team team1;
     private Team team2;
     private Player player;
-    private Event event;
+    private Game game;
     private boolean keepGoing;
     private String eventName;
 
@@ -81,8 +81,8 @@ public class EventAPP {
         if (team1.getPlayers().isEmpty() && team2.getPlayers().isEmpty()) {
             System.out.println("There are no current players, please start a match with new players or load team");
         } else {
-            event = new Event(team1, team2);
-            event.setEventName(eventName);
+            game = new Game(team1, team2);
+            game.setEventName(eventName);
             printResult();
         }
     }
@@ -131,9 +131,9 @@ public class EventAPP {
     // EFFECTS: loads both teams from file
     private void loadTeams() {
         try {
-            team1 = jsonReaderOne.read();
+            team1 = jsonReaderOne.read("team 1");
             System.out.println("Loaded " + team1.getTeamName() + " from " + JSON_STORE_ONE);
-            team2 = jsonReaderTwo.read();
+            team2 = jsonReaderTwo.read("team 1");
             System.out.println("Loaded " + team2.getTeamName() + " from " + JSON_STORE_TWO);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE_ONE + "and" + JSON_STORE_TWO);
@@ -212,7 +212,7 @@ public class EventAPP {
     // MODIFIES: this
     // EFFECTS: process the match result
     private String matchResult() {
-        return event.playMatch();
+        return game.playMatch();
     }
 
     // MODIFIES: this
@@ -247,8 +247,8 @@ public class EventAPP {
         System.out.println("Team 2:");
         command = input.next();
         team2 = new Team(command);
-        event = new Event(team1, team2);
-        event.setEventName(eventName);
+        game = new Game(team1, team2);
+        game.setEventName(eventName);
     }
 
 

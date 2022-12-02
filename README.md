@@ -36,3 +36,19 @@ and '2' to add player to team 2. Same instruction as the previous bullet point.
 Generator"
 - You can save the state of my application by press the button "Save Teams"
 - You can reload the state of my application by press the button "Load Teams"
+
+
+## Phrase 4: Task 2
+Adding a player: 
+- Player Lebron is created with rating 7
+- Player Lebron is added to the team
+Playing a Match
+- Match is played: Team One Win
+- Match is played: Team Two Win
+- Match is played: Tie
+Saving and loading a team:
+- File saved for team 1
+- File saved for team 2
+- File loaded for team 1
+- File loaded for team 2
+

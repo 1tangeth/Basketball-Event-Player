@@ -1,72 +1,66 @@
 package model;
 
-// Represents an Event having two teams and event name
+import java.util.Calendar;
+import java.util.Date;
+
+
+/**
+ * Represents an alarm system event.
+ */
 public class Event {
-    private Team team1;
-    private Team team2;
-    private String eventName;
+    private static final int HASH_CONSTANT = 13;
+    private Date dateLogged;
+    private String description;
 
-    // EFFECTS: Set the teams to team1 and team2, initialize the event name to an empty string and set to eventName
-    public Event(Team team1, Team team2) {
-        this.team1 = team1;
-        this.team2 = team2;
-        eventName = "";
+    /**
+     * Creates an event with the given description
+     * and the current date/time stamp.
+     * @param description  a description of the event
+     */
+    public Event(String description) {
+        dateLogged = Calendar.getInstance().getTime();
+        this.description = description;
     }
 
-    // EFFECTS: Return string results of the match base on 3 cases:
-    //          1. team1's sum of rating < team2's sum of rating, then return "Team 2 wins"
-    //          2. team1's sum of rating > team2's sum of rating, then return "Team 1 wins"
-    //          3. team1's sum of rating = team2's sum of rating, then return "Team1 and Team 2 tied"
-    public String playMatch() {
-        if (team1.getOverallRating() < team2.getOverallRating()) {
-            return teamTwoWin();
-        } else if (team1.getOverallRating() > team2.getOverallRating()) {
-            return teamOneWin();
-        } else {
-            return tie();
+    /**
+     * Gets the date of this event (includes time).
+     * @return  the date of the event
+     */
+    public Date getDate() {
+        return dateLogged;
+    }
+
+    /**
+     * Gets the description of this event.
+     * @return  the description of the event
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
         }
+
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+
+        return (this.dateLogged.equals(otherEvent.dateLogged)
+                && this.description.equals(otherEvent.description));
     }
 
-    // EFFECTS: return the result message of team1 ties to team2
-    private String tie() {
-        addResult(team1, team2, " tie to ");
-        addResult(team2, team1, " tie to ");
-        return "Team 1 and Team 2 tied";
+    @Override
+    public int hashCode() {
+        return (HASH_CONSTANT * dateLogged.hashCode() + description.hashCode());
     }
 
-    // EFFECT: return the result message of team 1 winning
-    private String teamOneWin() {
-        addResult(team1, team2, " won against ");
-        addResult(team2, team1, " lost to ");
-        return "Team 1 won";
-    }
-
-    // EFFECT: return the result message of team 2 winning
-    private String teamTwoWin() {
-        addResult(team2, team1, " won against ");
-        addResult(team1, team2, " lost to ");
-        return "Team 2 won";
-    }
-
-    // MODIFIES: Team
-    // EFFECTS: add the result message to the list of result in Team Class
-    private void addResult(Team team1, Team team2, String result) {
-        team1.addResult(team1.getTeamName() + result + team2.getTeamName() + " in " + this.eventName);
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
-    public String getEventName() {
-        return eventName;
-    }
-
-    public Team getTeam1() {
-        return team1;
-    }
-
-    public Team getTeam2() {
-        return team2;
+    @Override
+    public String toString() {
+        return dateLogged.toString() + "\n" + description;
     }
 }

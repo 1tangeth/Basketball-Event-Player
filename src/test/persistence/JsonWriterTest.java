@@ -2,6 +2,8 @@ package persistence;
 
 import model.Player;
 import model.Team;
+import model.persistence.JsonReader;
+import model.persistence.JsonWriter;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -33,7 +35,7 @@ public class JsonWriterTest extends JsonTest {
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyTeam.json");
-            tm = reader.read();
+            tm = reader.read("team 1");
             assertEquals("My Team", tm.getTeamName());
             assertEquals(0, tm.getPlayers().size());
         } catch (IOException e) {
@@ -57,7 +59,7 @@ public class JsonWriterTest extends JsonTest {
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralTeam.json");
-            tm = reader.read();
+            tm = reader.read("team 1");
             assertEquals("Lakers", tm.getTeamName());
             List<Player> players = tm.getPlayers();
             assertEquals(2, players.size());

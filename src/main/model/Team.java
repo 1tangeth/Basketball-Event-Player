@@ -2,7 +2,7 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import persistence.Writable;
+import model.persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,8 @@ public class Team implements Writable {
     // EFFECTS: add a Player object to the initialized list of Players.
     public void addPlayer(Player p) {
         players.add(p);
+        Event x = new Event("Player " + p.getPlayerName() + " is added to the team");
+        EventLog.getInstance().logEvent(x);
     }
 
 

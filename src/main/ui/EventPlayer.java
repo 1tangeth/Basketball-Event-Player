@@ -1,8 +1,11 @@
 package ui;
 
+import model.EventLog;
+import model.Game;
 import model.Team;
-import persistence.JsonReader;
-import persistence.JsonWriter;
+import model.Event;
+import model.persistence.JsonReader;
+import model.persistence.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,9 +25,9 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
 
     private JButton addButton1;
     private JButton addButton2;
-
     private JButton saveButton;
     private JButton loadButton;
+    private JButton playButton;
 
     private JPanel pinkPanel;
     private JPanel grayPanel;
@@ -37,6 +40,7 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
 
     private Team team1;
     private Team team2;
+    private Game game;
 
     private static final String JSON_STORE_ONE = "./data/team1.json";
     private static final String JSON_STORE_TWO = "./data/team2.json";
@@ -62,6 +66,15 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         createPanel();
         addComponents();
         initializeFrame();
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                for (Event x : EventLog.getInstance()) {
+                    System.out.println(x.getDescription());
+                }
+                System.exit(0);
+            }
+        });
     }
 
     // MODIFIES: this
@@ -77,6 +90,7 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
         grayPanel.add(addButton2);
         grayPanel.add(saveButton);
         grayPanel.add(loadButton);
+        grayPanel.add(playButton);
         pinkPanel.add(title);
     }
 
@@ -93,6 +107,9 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
 
         loadButton = new JButton("Load Teams");
         loadButton.addActionListener(this);
+
+        playButton = new JButton("Play Match!");
+        playButton.addActionListener(this);
     }
 
     // MODIFIES: this
@@ -187,16 +204,20 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
     // EFFECTS: create pop up window to ask user to enter Player name
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == addButton1) {
+        if (e.getSource() == addButton1 && team1.getPlayers().size() < 5) {
+            this.requestFocus();
             new AddPlayerWindow(team1, teamOnePanel, this);
+        } else if (e.getSource() == addButton2 && team2.getPlayers().size() < 5) {
             this.requestFocus();
-        } else if (e.getSource() == addButton2) {
             new AddPlayerWindow(team2, teamTwoPanel,this);
-            this.requestFocus();
         } else if (e.getSource() == saveButton) {
             saveTeam();
         } else if (e.getSource() == loadButton) {
             loadTeam();
+        } else if (e.getSource() == playButton) {
+            game = new Game(team1,team2);
+            this.requestFocus();
+            new ResultPopUpWindow(game);
         }
     }
 
@@ -204,10 +225,8 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
     // EFFECTS: loads both teams from file
     private void loadTeam() {
         try {
-            team1 = jsonReaderOne.read();
-            System.out.println("Loaded " + team1.getTeamName() + " from " + JSON_STORE_ONE);
-            team2 = jsonReaderTwo.read();
-            System.out.println("Loaded " + team2.getTeamName() + " from " + JSON_STORE_TWO);
+            team1 = jsonReaderOne.read("team 1");
+            team2 = jsonReaderTwo.read("team 2");
             updateTeamDisplay(team1, teamOnePanel);
             updateTeamDisplay(team2, teamTwoPanel);
         } catch (IOException e) {
@@ -244,11 +263,9 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
             jsonWriterOne.open();
             jsonWriterOne.write(team1);
             jsonWriterOne.close();
-            System.out.println("Saved " + team1.getTeamName() + " to " + JSON_STORE_ONE);
             jsonWriterTwo.open();
             jsonWriterTwo.write(team2);
             jsonWriterTwo.close();
-            System.out.println("Saved " + team2.getTeamName() + " to " + JSON_STORE_TWO);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE_ONE);
         }
@@ -263,9 +280,10 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
     // EFFECTS: create pop up window to ask user to enter Player name
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_1) {
+        if (e.getKeyCode() == KeyEvent.VK_1 && team1.getPlayers().size() < 5) {
             new AddPlayerWindow(team1, teamOnePanel, this);
-        } else if (e.getKeyCode() == KeyEvent.VK_2) {
+        }
+        if (e.getKeyCode() == KeyEvent.VK_2 && team2.getPlayers().size() < 5) {
             new AddPlayerWindow(team2, teamTwoPanel,this);
         }
     }
@@ -278,11 +296,5 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
     // EFFECTS: constructs event and runs application
     public static void main(String[] args) {
         new EventPlayer();
-//        try {
-//
-//            new EventAPP();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Unable to run application: file not found");
-//        }
     }
 }
