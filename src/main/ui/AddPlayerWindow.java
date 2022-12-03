@@ -81,9 +81,7 @@ public class AddPlayerWindow extends JFrame implements  ActionListener {
             displayPlayers();
             frame.revalidate();
             frame.repaint();
-            // TODO: POP UP WINDOW, MAKE USER PRESS RANDOM RATING BEFORE PROCEEDING.
             dispose();
-
         } else if (e.getActionCommand().equals("RandomizeRating")) {
             Random random = new Random();
             int randomRating = random.nextInt(100) + 1;

@@ -9,12 +9,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Add result pop up window, and display match results
 public class ResultPopUpWindow extends JFrame implements ActionListener {
     private JLabel result;
     private JButton exit;
     private Game game;
 
-    // TODO: Require Modifies Effects
+    // MODIFIES: this
+    // EFFECTS: set the JPanel, Jframe and the Match
     public ResultPopUpWindow(Game game) {
         super("Game Result");
         this.game = game;
@@ -29,6 +31,8 @@ public class ResultPopUpWindow extends JFrame implements ActionListener {
         setResizable(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: create buttons, and labels
     private void createComponents() {
         result = new JLabel(game.playMatch());
         exit = new JButton("ok");
@@ -37,6 +41,8 @@ public class ResultPopUpWindow extends JFrame implements ActionListener {
         exit.addActionListener(this);
     }
 
+    // MODIFIES: this
+    // EFFECTS: dispose JFrame if user press the "ok" button
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("ok")) {

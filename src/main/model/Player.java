@@ -17,10 +17,10 @@ public class Player implements Writable {
     public Player(String name) {
         this.name = name;
         setRandomRating();
-        event = new Event("Player " + this.name + " is created with rating " + this.rating);
-        EventLog.getInstance().logEvent(event);
     }
 
+    // REQUIRES: name has non-zero length
+    // EFFECTS: name of the player is set to name; initialize the rating of the player to rating
     public Player(String name, int rating) {
         this.name = name;
         this.rating = rating;

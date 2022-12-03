@@ -54,7 +54,6 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
     // EFFECTS: create jsonWriter and jsonReader, teams and create gui
     public EventPlayer() {
         super("Basketball Simulator");
-        //TODO: add team name manually
         jsonWriterOne = new JsonWriter(JSON_STORE_ONE);
         jsonWriterTwo = new JsonWriter(JSON_STORE_TWO);
         jsonReaderOne = new JsonReader(JSON_STORE_ONE);
