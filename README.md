@@ -2,20 +2,21 @@
 
 ## Create your basketball event
 
-User Story that I have achieved yet:
+User Story that I have achieved yet for GUI:
 - As a user, I want to be able to create a new team 
 - As a user, I want to be able to add players to a team 
 - As a user, I want each player to be assigned a random skill rating
 - As a user, I want to be able to create a basketball match
 - As a user, I want to be able to select two teams and add them into a match
 - As a user, I want to be able to make two teams play against each other and the team with higher skill point win
-- As a user, I want the two teams with same skill points to not have a tie but randomize the result for that match
-- As a user, I want to be able to keep count of each team's performance in the tournament(Keep track of each team's Match History)
+- As a user, I want the two teams with same skill points to tie
 - As a user, I want to be able to save my teams to file
 - As a user, I want to load the teams from the file
 - As a user, I want to either create new players to a team or play with loaded/existing players
 
-User Story in progress: 
+User Story that I did not finish for GUI: 
+- As a user, I want to be able to keep count of each team's performance in the tournament(Keep track of each team's
+  Match History)
 - As a user, I want to add skill points to the team that lost, so they can comeback
 - As a user, I want to have the option of creating a new team with new players after each match
 
@@ -42,13 +43,26 @@ Generator"
 Adding a player: 
 - Player Lebron is created with rating 7
 - Player Lebron is added to the team
-Playing a Match
+
+Playing a Match:
 - Match is played: Team One Win
 - Match is played: Team Two Win
 - Match is played: Tie
+
 Saving and loading a team:
 - File saved for team 1
 - File saved for team 2
 - File loaded for team 1
 - File loaded for team 2
 
+## Phrase 4: Task 2
+What I would refactor If I had more time:
+1. Looking at my UML diagram, both EventPlayer and Game has an association with multiplicity of 2 to Team. I would
+refactor my program to have EventPlayer to just associate to Game ,so I can perform operations on teams only inside 
+the Game class to improve cohesion and reduce coupling.
+2. In my UML diagram, many classes associate with the Event class. There are multiple instances of Event in the program.
+Perhaps I can make use of the Singleton pattern to make Event class only having one instance and provide a global point
+access to it. This will reduce the complexity of the program, and it will be easy to keep track of all the classes that 
+make use of the Event instance.
+3. Finally, when doing my UML diagram, I realized I did not make use exception classes in my program, instead I used
+require clauses. If I had more time I would make use of exceptions to make my code more robust.

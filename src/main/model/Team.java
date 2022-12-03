@@ -14,6 +14,7 @@ public class Team implements Writable {
     private List<Player> players = new ArrayList<>();
     private List<String> results = new ArrayList<>();
     private int overAllRating;
+    private Event event;
 
     // REQUIRES: teamName has non-zero length
     // EFFECTS: name of the team is set to teamName; the overall-prating of the team is initialized to zero and
@@ -26,9 +27,11 @@ public class Team implements Writable {
     // MODIFIES: this
     // EFFECTS: add a Player object to the initialized list of Players.
     public void addPlayer(Player p) {
-        players.add(p);
-        Event x = new Event("Player " + p.getPlayerName() + " is added to the team");
-        EventLog.getInstance().logEvent(x);
+        if (this.players.size() < 5) {
+            players.add(p);
+            event = new Event("Player " + p.getPlayerName() + " is added to the team");
+            EventLog.getInstance().logEvent(event);
+        }
     }
 
 

@@ -15,6 +15,7 @@ import org.json.*;
 // Represents a reader that reads team from JSON data stored in file
 public class JsonReader {
     private String source;
+    private Event event;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -24,8 +25,8 @@ public class JsonReader {
     // EFFECTS: reads Team from file and returns it;
     // throws IOException if an error occurs reading data from file
     public Team read(String team) throws IOException {
-        Event x = new Event("File loaded for " + team);
-        EventLog.getInstance().logEvent(x);
+        event = new Event("File loaded for " + team);
+        EventLog.getInstance().logEvent(event);
 
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);

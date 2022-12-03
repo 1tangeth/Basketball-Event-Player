@@ -280,10 +280,10 @@ public class EventPlayer extends JFrame implements ActionListener, KeyListener {
     // EFFECTS: create pop up window to ask user to enter Player name
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_1 && team1.getPlayers().size() < 5) {
+        if (e.getKeyCode() == KeyEvent.VK_1) {
             new AddPlayerWindow(team1, teamOnePanel, this);
         }
-        if (e.getKeyCode() == KeyEvent.VK_2 && team2.getPlayers().size() < 5) {
+        if (e.getKeyCode() == KeyEvent.VK_2) {
             new AddPlayerWindow(team2, teamTwoPanel,this);
         }
     }

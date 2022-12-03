@@ -4,6 +4,7 @@ package model;
 public class Game {
     private Team team1;
     private Team team2;
+    private Event event;
     private String eventName;
 
     // EFFECTS: Set the teams to team1 and team2, initialize the event name to an empty string and set to eventName
@@ -19,16 +20,16 @@ public class Game {
     //          3. team1's sum of rating = team2's sum of rating, then return "Team1 and Team 2 tied"
     public String playMatch() {
         if (team1.getOverallRating() < team2.getOverallRating()) {
-            Event x = new Event("Match is played: Team Two Win");
-            EventLog.getInstance().logEvent(x);
+            event = new Event("Match is played: Team Two Win");
+            EventLog.getInstance().logEvent(event);
             return teamTwoWin();
         } else if (team1.getOverallRating() > team2.getOverallRating()) {
-            Event x = new Event("Match is played: Team One Win");
-            EventLog.getInstance().logEvent(x);
+            event = new Event("Match is played: Team One Win");
+            EventLog.getInstance().logEvent(event);
             return teamOneWin();
         } else {
-            Event x = new Event("Match is played: Tie");
-            EventLog.getInstance().logEvent(x);
+            event = new Event("Match is played: Tie");
+            EventLog.getInstance().logEvent(event);
             return tie();
         }
     }

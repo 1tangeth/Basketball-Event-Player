@@ -10,21 +10,22 @@ public class Player implements Writable {
 
     private String name;
     private int rating;
+    private Event event;
 
     // REQUIRES: name has non-zero length
     // EFFECTS: name of the player is set to name; initialize the rating of the player to a random value
     public Player(String name) {
         this.name = name;
         setRandomRating();
-        Event x = new Event("Player " + this.name + " is created with rating " + this.rating);
-        EventLog.getInstance().logEvent(x);
+        event = new Event("Player " + this.name + " is created with rating " + this.rating);
+        EventLog.getInstance().logEvent(event);
     }
 
     public Player(String name, int rating) {
         this.name = name;
         this.rating = rating;
-        Event x = new Event("Player " + this.name + " is created with rating " + this.rating);
-        EventLog.getInstance().logEvent(x);
+        event = new Event("Player " + this.name + " is created with rating " + this.rating);
+        EventLog.getInstance().logEvent(event);
     }
 
     // REQUIRES: rating > 0

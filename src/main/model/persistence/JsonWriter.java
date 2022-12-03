@@ -15,6 +15,7 @@ public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String destination;
+    private Event event;
 
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
@@ -34,8 +35,8 @@ public class JsonWriter {
         JSONObject json = tm.toJson();
         saveToFile(json.toString(TAB));
 
-        Event x = new Event("File saved for " + tm.getTeamName());
-        EventLog.getInstance().logEvent(x);
+        event = new Event("File saved for " + tm.getTeamName());
+        EventLog.getInstance().logEvent(event);
     }
 
     // MODIFIES: this

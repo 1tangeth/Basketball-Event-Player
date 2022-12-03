@@ -1,4 +1,25 @@
 {
     "team name": "team 2",
-    "players": []
+    "players": [
+        {
+            "player name": "feqw",
+            "rating": 56
+        },
+        {
+            "player name": "feqw",
+            "rating": 44
+        },
+        {
+            "player name": "fweq",
+            "rating": 51
+        },
+        {
+            "player name": "feqw",
+            "rating": 95
+        },
+        {
+            "player name": "feqw",
+            "rating": 82
+        }
+    ]
 }
