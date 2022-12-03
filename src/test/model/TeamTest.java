@@ -34,6 +34,22 @@ class TeamTest {
     }
 
     @Test
+    void testAddPlayerOver5(){
+        testTeam.addPlayer(player1);
+        testTeam.addPlayer(player2);
+        testTeam.addPlayer(player1);
+        testTeam.addPlayer(player2);
+        testTeam.addPlayer(player1);
+        testTeam.addPlayer(player2);
+        assertEquals(5, testTeam.getPlayers().size());
+        assertEquals(player1, testTeam.getPlayers().get(0));
+        assertEquals(player2, testTeam.getPlayers().get(1));
+        assertEquals(player1, testTeam.getPlayers().get(2));
+        assertEquals(player2, testTeam.getPlayers().get(3));
+        assertEquals(player1, testTeam.getPlayers().get(4));
+    }
+
+    @Test
     void testClearPlayer() {
         testTeam.addPlayer(player1);
         testTeam.addPlayer(player2);
